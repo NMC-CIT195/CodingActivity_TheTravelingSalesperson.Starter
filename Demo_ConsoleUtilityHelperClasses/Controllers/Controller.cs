@@ -27,7 +27,6 @@ namespace CodingActivity_TheTravelingSalesperson
 
         #endregion
 
-
         #region CONSTRUCTORS
 
         public Controller()
@@ -51,7 +50,6 @@ namespace CodingActivity_TheTravelingSalesperson
         }
 
         #endregion
-
 
         #region METHODS
 
@@ -91,21 +89,6 @@ namespace CodingActivity_TheTravelingSalesperson
                 switch (userMenuChoice)
                 {
                     case MenuOption.None:
-                        break;
-                    case MenuOption.Travel:
-                        _salesperson.CitiesVisited.Add(_consoleView.DisplayGetNextCity());
-                        break;
-                    case MenuOption.Buy:
-                        _salesperson.CurrentStock.AddWidgets(_consoleView.DisplayGetNumberOfUnitsToBuy());
-                        break;
-                    case MenuOption.Sell:
-                        _salesperson.CurrentStock.SubtractWidgets(_consoleView.DisplayGetNumberOfUnitsToSell());
-                        break;
-                    case MenuOption.DisplayInventory:
-                        _consoleView.DisplayInventory();
-                        break;
-                    case MenuOption.DisplayCities:
-                        _consoleView.DisplayCitiesTraveled();
                         break;
                     case MenuOption.DisplayAccountInfo:
                         _consoleView.DisplayAccountInfo();

@@ -12,10 +12,7 @@ namespace CodingActivity_TheTravelingSalesperson
 
         public enum WidgetType
         {
-            None,
-            Furry,
-            Spotted,
-            Dancing
+            None
         }
 
         #endregion

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CodingActivity_TheTravelingSalesperson
 {
@@ -47,8 +44,8 @@ namespace CodingActivity_TheTravelingSalesperson
         /// </summary>
         private void InitializeConsole()
         {
-            ConsoleUtil.WindowTitle = "Laughing Leaf Productions";
-            ConsoleUtil.HeaderText = "The Traveling Salesperson Application";
+            ConsoleUtil.WindowTitle = "- add window title text -";
+            ConsoleUtil.HeaderText = " - add initial header text -";
         }
 
         /// <summary>
@@ -95,16 +92,7 @@ namespace CodingActivity_TheTravelingSalesperson
 
             ConsoleUtil.DisplayReset();
 
-            ConsoleUtil.DisplayMessage("Written by John Velis");
-            ConsoleUtil.DisplayMessage("Northwestern Michigan College");
-            Console.WriteLine();
-
-            sb.Clear();
-            sb.AppendFormat("You are a traveling salesperson buying and selling widgets ");
-            sb.AppendFormat("around the country. You will be prompted regarding which city ");
-            sb.AppendFormat("you wish to travel to and will then be asked whether you wish to buy ");
-            sb.AppendFormat("or sell widgets.");
-            ConsoleUtil.DisplayMessage(sb.ToString());
+            ConsoleUtil.DisplayMessage("- add welcome message -");
             Console.WriteLine();
 
             sb.Clear();
@@ -122,8 +110,6 @@ namespace CodingActivity_TheTravelingSalesperson
         /// </summary>
         public void DisplaySetupAccount()
         {
-            string userResponse;
-
             ConsoleUtil.HeaderText = "Account Setup";
             ConsoleUtil.DisplayReset();
 
@@ -134,47 +120,9 @@ namespace CodingActivity_TheTravelingSalesperson
             _salesperson.FirstName = Console.ReadLine();
             Console.WriteLine();
 
-            ConsoleUtil.DisplayPromptMessage("Enter your last name: ");
-            _salesperson.LastName = Console.ReadLine();
-            Console.WriteLine();
-
-            ConsoleUtil.DisplayPromptMessage("Enter your account ID: ");
-            _salesperson.AccountID = Console.ReadLine();
-            Console.WriteLine();
-
-            ConsoleUtil.DisplayMessage("Widget Types");
-            Console.WriteLine();
-
             //
-            // list all widget types
+            // TODO prompt the user to input all of the required account information
             //
-            foreach (string widgeType in Enum.GetNames(typeof(WidgetItemStock.WidgetType)))
-            {
-                //
-                // do not display the "None" enum value
-                //
-                if (widgeType != WidgetItemStock.WidgetType.None.ToString())
-                {
-                    ConsoleUtil.DisplayMessage(widgeType);
-                }
-
-            }
-
-            //
-            // TODO - add validation
-            //
-            Console.WriteLine();
-            ConsoleUtil.DisplayPromptMessage("Enter the widget type: ");
-            userResponse = Console.ReadLine();
-            _salesperson.CurrentStock.Type = (WidgetItemStock.WidgetType)Enum.Parse(typeof(WidgetItemStock.WidgetType), userResponse, true);
-
-            ConsoleUtil.DisplayPromptMessage("Enter the current number of widgets in your stock: ");
-            _salesperson.CurrentStock.AddWidgets(int.Parse(Console.ReadLine()));
-            Console.WriteLine();
-
-            ConsoleUtil.DisplayReset();
-
-            ConsoleUtil.DisplayMessage("Your account is setup");
 
             DisplayContinuePrompt();
         }
@@ -186,7 +134,7 @@ namespace CodingActivity_TheTravelingSalesperson
         {
             ConsoleUtil.DisplayReset();
 
-            ConsoleUtil.DisplayMessage("Thank you for using The Traveling Salesperson Application.");
+            ConsoleUtil.DisplayMessage("- add closing message -");
 
             DisplayContinuePrompt();
         }
@@ -199,6 +147,9 @@ namespace CodingActivity_TheTravelingSalesperson
             MenuOption userMenuChoice = MenuOption.None;
             bool usingMenu = true;
 
+            //
+            // TODO enable each application function separately and test
+            //
             while (usingMenu)
             {
                 //
@@ -213,11 +164,6 @@ namespace CodingActivity_TheTravelingSalesperson
                 ConsoleUtil.DisplayMessage("Please type the number of your menu choice.");
                 Console.WriteLine();
                 Console.WriteLine(
-                    "\t" + "1. Travel" + Environment.NewLine +
-                    "\t" + "2. Buy" + Environment.NewLine +
-                    "\t" + "3. Sell" + Environment.NewLine +
-                    "\t" + "4. Display Inventory" + Environment.NewLine +
-                    "\t" + "5. Display Cities" + Environment.NewLine +
                     "\t" + "6. Display Account Info" + Environment.NewLine +
                     "\t" + "E. Exit" + Environment.NewLine);
 
@@ -228,26 +174,6 @@ namespace CodingActivity_TheTravelingSalesperson
                 ConsoleKeyInfo userResponse = Console.ReadKey(true);
                 switch (userResponse.KeyChar)
                 {
-                    case '1':
-                        userMenuChoice = MenuOption.Travel;
-                        usingMenu = false;
-                        break;
-                    case '2':
-                        userMenuChoice = MenuOption.Buy;
-                        usingMenu = false;
-                        break;
-                    case '3':
-                        userMenuChoice = MenuOption.Sell;
-                        usingMenu = false;
-                        break;
-                    case '4':
-                        userMenuChoice = MenuOption.DisplayInventory;
-                        usingMenu = false;
-                        break;
-                    case '5':
-                        userMenuChoice = MenuOption.DisplayCities;
-                        usingMenu = false;
-                        break;
                     case '6':
                         userMenuChoice = MenuOption.DisplayAccountInfo;
                         usingMenu = false;
@@ -258,15 +184,9 @@ namespace CodingActivity_TheTravelingSalesperson
                         usingMenu = false;
                         break;
                     default:
-                        Console.WriteLine(
-                            "It appears you have selected an incorrect choice." + Environment.NewLine +
-                            "Press any key to continue or the ESC key to quit the application.");
-
-                        userResponse = Console.ReadKey(true);
-                        if (userResponse.Key == ConsoleKey.Escape)
-                        {
-                            usingMenu = false;
-                        }
+                        //
+                        // TODO handle invalid menu responses from user
+                        //
                         break;
                 }
             }
@@ -282,10 +202,8 @@ namespace CodingActivity_TheTravelingSalesperson
         {
             string nextCity = "";
 
+            ConsoleUtil.HeaderText = "Next City of Travel";
             ConsoleUtil.DisplayReset();
-
-            ConsoleUtil.DisplayPromptMessage("Enter the name of the next city:");
-            nextCity = Console.ReadLine();
 
             return nextCity;
         }
@@ -296,20 +214,10 @@ namespace CodingActivity_TheTravelingSalesperson
         /// <returns>int number of units to buy</returns>
         public int DisplayGetNumberOfUnitsToBuy()
         {
-            int numberOfUnitsToAdd;
+            int numberOfUnitsToAdd = 0;
 
             ConsoleUtil.HeaderText = "Buy Inventory";
             ConsoleUtil.DisplayReset();
-
-            // TODO - validate user input: units to buy
-            ConsoleUtil.DisplayPromptMessage("Enter the number of " + _salesperson.CurrentStock.Type + " widget units to buy:");
-            numberOfUnitsToAdd = int.Parse(Console.ReadLine());
-
-            ConsoleUtil.DisplayReset();
-
-            ConsoleUtil.DisplayMessage(numberOfUnitsToAdd + " " + _salesperson.CurrentStock.Type.ToString() + " widgets have been added to the inventory.");
-
-            DisplayContinuePrompt();
 
             return numberOfUnitsToAdd;
         }
@@ -320,19 +228,10 @@ namespace CodingActivity_TheTravelingSalesperson
         /// <returns>int number of units to buy</returns>
         public int DisplayGetNumberOfUnitsToSell()
         {
-            int numberOfUnitsToSell;
+            int numberOfUnitsToSell = 0;
 
             ConsoleUtil.HeaderText = "Sell Inventory";
             ConsoleUtil.DisplayReset();
-
-            // TODO - validate user input: units to sell
-            // TODO - validate that the current inventory is greater than the units to sell
-            ConsoleUtil.DisplayPromptMessage("Enter the number of " + _salesperson.CurrentStock.Type.ToString() + " widget units to sell:");
-            numberOfUnitsToSell = int.Parse(Console.ReadLine());
-
-            ConsoleUtil.DisplayReset();
-
-            ConsoleUtil.DisplayMessage(numberOfUnitsToSell + " " + _salesperson.CurrentStock.Type.ToString() + " widgets have been subtracted from the inventory.");
 
             DisplayContinuePrompt();
 
@@ -347,10 +246,6 @@ namespace CodingActivity_TheTravelingSalesperson
             ConsoleUtil.HeaderText = "Current Inventory";
             ConsoleUtil.DisplayReset();
 
-            ConsoleUtil.DisplayMessage("Widget type: " + _salesperson.CurrentStock.Type);
-            ConsoleUtil.DisplayMessage("Number of units: " + _salesperson.CurrentStock.NumberOfUnits);
-            Console.WriteLine();
-
             DisplayContinuePrompt();
         }
 
@@ -359,15 +254,8 @@ namespace CodingActivity_TheTravelingSalesperson
         /// </summary>
         public void DisplayCitiesTraveled()
         {
+            ConsoleUtil.HeaderText = "Cities Traveled To";
             ConsoleUtil.DisplayReset();
-
-            ConsoleUtil.DisplayMessage("You have traveled to the following cities.");
-            Console.WriteLine();
-
-            foreach (string city in _salesperson.CitiesVisited)
-            {
-                ConsoleUtil.DisplayMessage(city);
-            }
 
             DisplayContinuePrompt();
         }
@@ -381,10 +269,6 @@ namespace CodingActivity_TheTravelingSalesperson
             ConsoleUtil.DisplayReset();
 
             ConsoleUtil.DisplayMessage("First Name: " + _salesperson.FirstName);
-            ConsoleUtil.DisplayMessage("Last Name: " + _salesperson.LastName);
-            ConsoleUtil.DisplayMessage("Account ID: " + _salesperson.AccountID);
-            ConsoleUtil.DisplayMessage("Widget Type: " + _salesperson.CurrentStock.Type);
-            ConsoleUtil.DisplayMessage("Units of Widgets: " + _salesperson.CurrentStock.NumberOfUnits);
 
             DisplayContinuePrompt();
         }
